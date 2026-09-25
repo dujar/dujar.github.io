@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>dujarfa — full-stack engineer</title>
-  <meta name="description" content="Portfolio of dujarfa — full-stack engineer working in Rust and TypeScript. Declarative UI runtimes, systematic trading engines, and AI agent tooling.">
+  <meta name="description" content="Portfolio of dujarfa — full-stack engineer working in Rust and TypeScript. Declarative UI runtimes, systematic trading engines, and AI agent tooling. This site is itself built with leonui, the author's declarative UI runtime.">
   <meta property="og:title" content="dujarfa — full-stack engineer">
-  <meta property="og:description" content="Selected works in Rust & TypeScript — declarative UI runtimes, trading engines, agent tooling.">
+  <meta property="og:description" content="Selected works in Rust & TypeScript, compiled by leonui — the author's own declarative UI runtime.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://dujar.github.io/">
   <meta property="og:image" content="https://avatars.githubusercontent.com/u/17208217?v=4">
@@ -18,17 +18,44 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&display=swap">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body
+  ui:state="q: '';
+            sort: 'id';
+            theme: '';
+            works: [
+              { id: 1, name: 'leonui', desc: 'A declarative UI runtime for plain HTML — ui:* attributes and signals, the browser itself as the framework. Agent-first: ships with its own skill.', lang: 'TypeScript', year: 2026, url: 'https://github.com/dujar/leonui' },
+              { id: 2, name: 'leonx', desc: 'Systematic trading framework for Hyperliquid perpetuals. Strategies as expressions, one engine for backtest and live, a probability terminal and desktop shell.', lang: 'Rust', year: 2026, url: 'https://github.com/dujar/leonx' },
+              { id: 3, name: 'vetted', desc: 'Evidence-linked token verification and guarded swaps for Robinhood Chain stock tokens — built for Arbitrum Open House Singapore 2026.', lang: 'Rust', year: 2026, url: 'https://github.com/dujar/vetted' },
+              { id: 4, name: 'agent-workbench', desc: 'Twelve Claude Code subagents that carry a product from idea to merged code, with a judge at every handoff.', lang: 'Shell', year: 2026, url: 'https://github.com/dujar/agent-workbench' },
+              { id: 5, name: 'defauverelle', desc: 'Cross-platform desktop application, shipped from a public build harness covering macOS, Windows and Linux.', lang: 'TypeScript', year: 2026, url: 'https://github.com/dujar/defauverelle' },
+              { id: 6, name: 'dsh-job-cv', desc: 'Live HTML-to-PDF CV preview and an application tracker — one master document that every application tailors from.', lang: 'JavaScript', year: 2026, url: 'https://github.com/dujar/dsh-job-cv' }
+            ];
+            papers: [
+              { id: 7, name: 'jevhyp', year: 2026, lang: 'Rust', url: 'https://github.com/dujar/jevhyp' },
+              { id: 8, name: 'schoolbook', year: 2026, lang: 'Rust', url: 'https://github.com/dujar/schoolbook' },
+              { id: 9, name: 'brutcoin', year: 2026, lang: 'Rust', url: 'https://github.com/dujar/brutcoin' },
+              { id: 10, name: 'hl-cli', year: 2026, lang: 'Rust', url: 'https://github.com/dujar/hl-cli' },
+              { id: 11, name: 'reviewfuse', year: 2025, lang: 'TypeScript', url: 'https://github.com/dujar/reviewfuse' },
+              { id: 12, name: 'dsh-community-plugins', year: 2026, lang: 'JavaScript', url: 'https://github.com/dujar/dsh-community-plugins' }
+            ]"
+  ui:computed="sorted: sortBy(works, sort)"
+  ui:bind-class="theme == 'dark' ? 'theme-dark' : (theme == 'light' ? 'theme-light' : '')">
+
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="masthead">
     <div class="wrap masthead-inner">
       <span class="mast-item">dujar.github.io</span>
-      <span class="mast-item mast-right">Singapore&#8202;/&#8202;Thailand &middot; on GitHub since 2016</span>
+      <span class="mast-actions">
+        <span class="mast-item mast-right">Singapore&#8202;/&#8202;Thailand &middot; on GitHub since 2016</span>
+        <button type="button" class="pill"
+          ui:fx="click: set theme = theme == 'dark' ? 'light' : (theme == 'light' ? '' : 'dark')"
+          ui:bind="text: theme == 'dark' ? 'night edition' : (theme == 'light' ? 'day edition' : 'system edition')">system edition</button>
+      </span>
     </div>
   </header>
 
-  <main id="main" class="wrap">
+  <main id="main" class="wrap" ui:computed="filtering: q != ''">
 
     <section class="titleblock" aria-labelledby="site-title">
       <div class="title-left">
@@ -46,56 +73,32 @@
     <section class="works" aria-labelledby="works-title">
       <div class="section-head rise d5">
         <h2 id="works-title"><span class="sect-no" aria-hidden="true">&sect;&thinsp;1.</span> Selected works</h2>
-        <span class="head-note">six of seventy-five</span>
+        <span class="head-note" ui:bind="text: filtering ? 'matching works' : 'six of seventy-five'">six of seventy-five</span>
       </div>
+
+      <noscript><p class="noscript-note">This document is compiled by leonui, a reactive runtime &mdash; enable JavaScript to render the lists below.</p></noscript>
+
+      <div class="filter-row">
+        <label class="microlabel" for="record-filter">Search</label>
+        <input id="record-filter" class="filter-input" type="text" autocomplete="off"
+               placeholder="filter the record &mdash; try &ldquo;Rust&rdquo;" ui:model="q">
+        <button type="button" class="pill" hidden
+                ui:bind-hidden="!filtering"
+                ui:fx="click: set q = ''">clear</button>
+        <button type="button" class="pill"
+                ui:fx="click: set sort = sort == 'id' ? 'name' : 'id'"
+                ui:bind="text: sort == 'id' ? 'ordered as curated' : 'ordered alphabetically'">ordered as curated</button>
+      </div>
+
       <ol class="works-list">
-        <li class="work rise d6">
-          <span class="work-no" aria-hidden="true">01</span>
+        <li class="work rise d6" ui:each="w in sorted" ui:key="id"
+            ui:bind-hidden="filtering && !contains(w.name + ' ' + w.desc + ' ' + w.lang, q)">
+          <span class="work-no" aria-hidden="true" ui:bind="text: '0' + w.id">01</span>
           <div class="work-body">
-            <h3 class="work-name"><a href="https://github.com/dujar/leonui">leonui<span class="arrow" aria-hidden="true">&rarr;</span></a></h3>
-            <p class="work-desc">A declarative UI runtime for plain HTML &mdash; <code>ui:*</code> attributes and signals, the browser itself as the framework. Agent-first: ships with its own skill.</p>
+            <h3 class="work-name"><a ui:bind-attr:href="w.url" ui:bind="text: w.name">leonui</a><span class="arrow" aria-hidden="true">&rarr;</span></h3>
+            <p class="work-desc" ui:bind="text: w.desc"></p>
           </div>
-          <span class="work-meta"><span class="meta-lang">TypeScript</span><span class="meta-year">2026</span></span>
-        </li>
-        <li class="work">
-          <span class="work-no" aria-hidden="true">02</span>
-          <div class="work-body">
-            <h3 class="work-name"><a href="https://github.com/dujar/leonx">leonx<span class="arrow" aria-hidden="true">&rarr;</span></a></h3>
-            <p class="work-desc">Systematic trading framework for Hyperliquid perpetuals. Strategies as expressions, one engine for backtest and live, a probability terminal and desktop shell.</p>
-          </div>
-          <span class="work-meta"><span class="meta-lang">Rust</span><span class="meta-year">2026</span></span>
-        </li>
-        <li class="work">
-          <span class="work-no" aria-hidden="true">03</span>
-          <div class="work-body">
-            <h3 class="work-name"><a href="https://github.com/dujar/vetted">vetted<span class="arrow" aria-hidden="true">&rarr;</span></a></h3>
-            <p class="work-desc">Evidence-linked token verification and guarded swaps for Robinhood Chain stock tokens &mdash; built for Arbitrum Open House Singapore 2026.</p>
-          </div>
-          <span class="work-meta"><span class="meta-lang">Rust</span><span class="meta-year">2026</span></span>
-        </li>
-        <li class="work">
-          <span class="work-no" aria-hidden="true">04</span>
-          <div class="work-body">
-            <h3 class="work-name"><a href="https://github.com/dujar/agent-workbench">agent-workbench<span class="arrow" aria-hidden="true">&rarr;</span></a></h3>
-            <p class="work-desc">Twelve Claude Code subagents that carry a product from idea to merged code, with a judge at every handoff.</p>
-          </div>
-          <span class="work-meta"><span class="meta-lang">Shell</span><span class="meta-year">2026</span></span>
-        </li>
-        <li class="work">
-          <span class="work-no" aria-hidden="true">05</span>
-          <div class="work-body">
-            <h3 class="work-name"><a href="https://github.com/dujar/defauverelle">defauverelle<span class="arrow" aria-hidden="true">&rarr;</span></a></h3>
-            <p class="work-desc">Cross-platform desktop application, shipped from a public build harness covering macOS, Windows and Linux.</p>
-          </div>
-          <span class="work-meta"><span class="meta-lang">TypeScript</span><span class="meta-year">2026</span></span>
-        </li>
-        <li class="work">
-          <span class="work-no" aria-hidden="true">06</span>
-          <div class="work-body">
-            <h3 class="work-name"><a href="https://github.com/dujar/dsh-job-cv">dsh-job-cv<span class="arrow" aria-hidden="true">&rarr;</span></a></h3>
-            <p class="work-desc">Live HTML-to-PDF CV preview and an application tracker &mdash; one master document that every application tailors from.</p>
-          </div>
-          <span class="work-meta"><span class="meta-lang">JavaScript</span><span class="meta-year">2026</span></span>
+          <span class="work-meta"><span class="meta-lang" ui:bind="text: w.lang">TypeScript</span><span class="meta-year" ui:bind="text: w.year">2026</span></span>
         </li>
       </ol>
     </section>
@@ -103,15 +106,11 @@
     <section class="biblio" aria-labelledby="biblio-title">
       <div class="section-head">
         <h2 id="biblio-title"><span class="sect-no" aria-hidden="true">&sect;&thinsp;2.</span> Further reading</h2>
-        <span class="head-note">a partial bibliography</span>
+        <span class="head-note" ui:bind="text: filtering ? 'matching entries' : 'a partial bibliography'">a partial bibliography</span>
       </div>
       <ol class="bib-list">
-        <li><a href="https://github.com/dujar/jevhyp">jevhyp</a>, 2026. Rust.</li>
-        <li><a href="https://github.com/dujar/schoolbook">schoolbook</a>, 2026. Rust.</li>
-        <li><a href="https://github.com/dujar/brutcoin">brutcoin</a>, 2026. Rust.</li>
-        <li><a href="https://github.com/dujar/hl-cli">hl-cli</a>, 2026. Rust.</li>
-        <li><a href="https://github.com/dujar/reviewfuse">reviewfuse</a>, 2025. TypeScript.</li>
-        <li><a href="https://github.com/dujar/dsh-community-plugins">dsh-community-plugins</a>, 2026. JavaScript.</li>
+        <li ui:each="p in papers" ui:key="id"
+            ui:bind-hidden="filtering && !contains(p.name + ' ' + p.lang, q)"><a ui:bind-attr:href="p.url" ui:bind="text: p.name">jevhyp</a>, <span ui:bind="text: p.year">2026</span>. <span ui:bind="text: p.lang">Rust</span>.</li>
       </ol>
       <p class="bib-more">The complete bibliography &mdash; 75 public repositories &mdash; lives at <a href="https://github.com/dujar?tab=repositories">github.com/dujar</a>.</p>
     </section>
@@ -131,7 +130,7 @@
         </div>
         <div class="colophon-note">
           <h3 class="microlabel">Colophon</h3>
-          <p>Set in Fraunces and Newsreader. Hand-written HTML and CSS &mdash; no frameworks, no build step, no JavaScript. Typeset in honor of a thesis written in <span class="tex" aria-label="LaTeX">L<span class="tex-a">A</span>T<span class="tex-e">E</span>X</span>; served by GitHub Pages. The source <em>is</em> this site.</p>
+          <p>Set in Fraunces and Newsreader. The lists on this page are declared as data and compiled by <a href="https://github.com/dujar/leonui">leonui&thinsp;0.1.2</a> &mdash; signals, a keyed list, sorted and filtered through its attribute grammar; a 22 KB runtime, no build step, no vdom. The framework is my own; this page is the proof. Typeset in honor of a thesis written in <span class="tex" aria-label="LaTeX">L<span class="tex-a">A</span>T<span class="tex-e">E</span>X</span>; served by GitHub Pages.</p>
         </div>
       </div>
       <p class="footnote" id="fn-1">&dagger;&ensp;On GitHub since 12 February 2016. This document compiles itself &mdash; every push to <code>main</code> re-typesets the page.</p>
@@ -142,5 +141,6 @@
     </div>
   </footer>
 
+  <script type="module" src="leonui.js"></script>
 </body>
 </html>
