@@ -1,3 +1,4 @@
+<!-- GENERATED FILE — edit components/*.html and run ./build.py instead -->
 <!doctype html>
 <html lang="en">
 <head>
@@ -10,6 +11,8 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://dujar.github.io/">
   <meta property="og:image" content="https://avatars.githubusercontent.com/u/17208217?v=4">
+  <link rel="canonical" href="https://dujar.github.io/">
+  <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#f5efe3" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#211a12" media="(prefers-color-scheme: dark)">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -42,21 +45,22 @@
             ]"
   ui:computed="sorted: sortBy(works, sort)"
   ui:bind-class="theme == 'dark' ? 'theme-dark' : (theme == 'light' ? 'theme-light' : '')">
-
   <a class="skip-link" href="#main">Skip to content</a>
 
   <header class="masthead">
     <div class="wrap masthead-inner">
-      <span class="mast-item">dujar.github.io</span>
+      <span class="mast-item mast-brand">
+        <img class="mast-avatar" src="https://avatars.githubusercontent.com/u/17208217?v=4&s=96" alt="" width="26" height="26" loading="eager">
+        dujar.github.io
+      </span>
       <span class="mast-actions">
         <span class="mast-item mast-right">Singapore&#8202;/&#8202;Thailand &middot; on GitHub since 2016</span>
-        <button type="button" class="pill"
+        <button type="button" class="pill" aria-label="Colour scheme: follow system, night, or day"
           ui:fx="click: set theme = theme == 'dark' ? 'light' : (theme == 'light' ? '' : 'dark')"
           ui:bind="text: theme == 'dark' ? 'night edition' : (theme == 'light' ? 'day edition' : 'system edition')">system edition</button>
       </span>
     </div>
   </header>
-
   <main id="main" class="wrap" ui:computed="filtering: q != ''">
 
     <section class="titleblock" aria-labelledby="site-title">
@@ -71,7 +75,6 @@
         <p class="keywords"><span class="microlabel">Keywords</span> <span class="kw-list">Rust &middot; TypeScript &middot; JavaScript &middot; declarative UI &middot; trading systems &middot; agent tooling</span></p>
       </div>
     </section>
-
     <section class="works" aria-labelledby="works-title">
       <div class="section-head rise d5">
         <h2 id="works-title"><span class="sect-no" aria-hidden="true">&sect;&thinsp;1.</span> Selected works</h2>
@@ -103,8 +106,12 @@
           <span class="work-meta"><span class="meta-lang" ui:bind="text: w.lang">TypeScript</span><span class="meta-year" ui:bind="text: w.year">2026</span></span>
         </li>
       </ol>
-    </section>
 
+      <div class="empty-note">
+        <p>No works match &ldquo;<span ui:bind="text: q"></span>&rdquo; in this collection.</p>
+        <button type="button" class="pill" ui:fx="click: set q = ''">show everything</button>
+      </div>
+    </section>
     <section class="biblio" aria-labelledby="biblio-title">
       <div class="section-head">
         <h2 id="biblio-title"><span class="sect-no" aria-hidden="true">&sect;&thinsp;2.</span> Further reading</h2>
@@ -114,11 +121,14 @@
         <li ui:each="p in papers" ui:key="id"
             ui:bind-hidden="filtering && !contains(p.name + ' ' + p.lang, q)"><a ui:bind-attr:href="p.url" ui:bind="text: p.name">jevhyp</a>, <span ui:bind="text: p.year">2026</span>. <span ui:bind="text: p.lang">Rust</span>.</li>
       </ol>
+      <div class="empty-note">
+        <p>No entries match &ldquo;<span ui:bind="text: q"></span>&rdquo; in this bibliography.</p>
+        <button type="button" class="pill" ui:fx="click: set q = ''">show everything</button>
+      </div>
       <p class="bib-more">The complete bibliography &mdash; 75 public repositories &mdash; lives at <a href="https://github.com/dujar?tab=repositories">github.com/dujar</a>.</p>
     </section>
 
   </main>
-
   <footer class="colophon" aria-labelledby="colophon-title">
     <div class="wrap">
       <div class="section-head">
@@ -132,7 +142,7 @@
         </div>
         <div class="colophon-note">
           <h3 class="microlabel">Colophon</h3>
-          <p>Set in Fraunces and Newsreader. The lists on this page are declared as data and compiled by <a href="https://github.com/dujar/leonui">leonui&thinsp;0.1.2</a> &mdash; signals, a keyed list, sorted and filtered through its attribute grammar; a 22 KB runtime, no build step, no vdom. The framework is my own; this page is the proof. Typeset in honor of a thesis written in <span class="tex" aria-label="LaTeX">L<span class="tex-a">A</span>T<span class="tex-e">E</span>X</span>; served by GitHub Pages.</p>
+          <p>Set in Fraunces and Newsreader. The source lives as components under <code>components/</code>, assembled by a thirty-line script; the lists are declared as data and bound by <a href="https://github.com/dujar/leonui">leonui&thinsp;0.1.2</a> &mdash; signals, a keyed list, sorted and filtered through its attribute grammar. The framework is my own; this page is the proof. Typeset in honor of a thesis written in <span class="tex" aria-label="LaTeX">L<span class="tex-a">A</span>T<span class="tex-e">E</span>X</span>; served by GitHub Pages.</p>
         </div>
       </div>
       <p class="footnote" id="fn-1">&dagger;&ensp;On GitHub since 12 February 2016. This document compiles itself &mdash; every push to <code>main</code> re-typesets the page.</p>

@@ -1,0 +1,17 @@
+    <section class="biblio" aria-labelledby="biblio-title">
+      <div class="section-head">
+        <h2 id="biblio-title"><span class="sect-no" aria-hidden="true">&sect;&thinsp;2.</span> Further reading</h2>
+        <span class="head-note" ui:bind="text: filtering ? 'matching entries' : 'a partial bibliography'">a partial bibliography</span>
+      </div>
+      <ol class="bib-list">
+        <li ui:each="p in papers" ui:key="id"
+            ui:bind-hidden="filtering && !contains(p.name + ' ' + p.lang, q)"><a ui:bind-attr:href="p.url" ui:bind="text: p.name">jevhyp</a>, <span ui:bind="text: p.year">2026</span>. <span ui:bind="text: p.lang">Rust</span>.</li>
+      </ol>
+      <div class="empty-note">
+        <p>No entries match &ldquo;<span ui:bind="text: q"></span>&rdquo; in this bibliography.</p>
+        <button type="button" class="pill" ui:fx="click: set q = ''">show everything</button>
+      </div>
+      <p class="bib-more">The complete bibliography &mdash; 75 public repositories &mdash; lives at <a href="https://github.com/dujar?tab=repositories">github.com/dujar</a>.</p>
+    </section>
+
+  </main>

@@ -1,0 +1,22 @@
+<body
+  ui:state="q: '';
+            sort: 'id';
+            theme: '';
+            works: [
+              { id: 1, name: 'leonui', desc: 'A declarative UI runtime for plain HTML — ui:* attributes and signals, the browser itself as the framework. Agent-first: ships with its own skill.', lang: 'TypeScript', year: 2026, url: 'https://github.com/dujar/leonui' },
+              { id: 2, name: 'leonx', desc: 'Systematic trading framework for Hyperliquid perpetuals. Strategies as expressions, one engine for backtest and live, a probability terminal and desktop shell.', lang: 'Rust', year: 2026, url: 'https://github.com/dujar/leonx' },
+              { id: 3, name: 'vetted', desc: 'Evidence-linked token verification and guarded swaps for Robinhood Chain stock tokens — built for Arbitrum Open House Singapore 2026.', lang: 'Rust', year: 2026, url: 'https://github.com/dujar/vetted' },
+              { id: 4, name: 'agent-workbench', desc: 'Twelve Claude Code subagents that carry a product from idea to merged code, with a judge at every handoff.', lang: 'Shell', year: 2026, url: 'https://github.com/dujar/agent-workbench' },
+              { id: 5, name: 'defauverelle', desc: 'Cross-platform desktop application, shipped from a public build harness covering macOS, Windows and Linux.', lang: 'TypeScript', year: 2026, url: 'https://github.com/dujar/defauverelle' },
+              { id: 6, name: 'dsh-job-cv', desc: 'Live HTML-to-PDF CV preview and an application tracker — one master document that every application tailors from.', lang: 'JavaScript', year: 2026, url: 'https://github.com/dujar/dsh-job-cv' }
+            ];
+            papers: [
+              { id: 7, name: 'jevhyp', year: 2026, lang: 'Rust', url: 'https://github.com/dujar/jevhyp' },
+              { id: 8, name: 'schoolbook', year: 2026, lang: 'Rust', url: 'https://github.com/dujar/schoolbook' },
+              { id: 9, name: 'brutcoin', year: 2026, lang: 'Rust', url: 'https://github.com/dujar/brutcoin' },
+              { id: 10, name: 'hl-cli', year: 2026, lang: 'Rust', url: 'https://github.com/dujar/hl-cli' },
+              { id: 11, name: 'reviewfuse', year: 2025, lang: 'TypeScript', url: 'https://github.com/dujar/reviewfuse' },
+              { id: 12, name: 'dsh-community-plugins', year: 2026, lang: 'JavaScript', url: 'https://github.com/dujar/dsh-community-plugins' }
+            ]"
+  ui:computed="sorted: sortBy(works, sort)"
+  ui:bind-class="theme == 'dark' ? 'theme-dark' : (theme == 'light' ? 'theme-light' : '')">

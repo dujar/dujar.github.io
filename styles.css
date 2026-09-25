@@ -4,6 +4,7 @@
    ———————————————————————————————————————————————— */
 
 :root {
+  color-scheme: light dark;
   --paper: oklch(0.972 0.011 84);
   --paper-raised: oklch(0.983 0.008 84);
   --ink: oklch(0.24 0.015 62);
@@ -35,6 +36,7 @@
 /* explicit edition overrides, driven by the masthead toggle (leonui) */
 
 body.theme-dark {
+  color-scheme: dark;
   --paper: oklch(0.186 0.013 62);
   --paper-raised: oklch(0.215 0.014 62);
   --ink: oklch(0.905 0.014 80);
@@ -47,6 +49,7 @@ body.theme-dark {
 }
 
 body.theme-light {
+  color-scheme: light;
   --paper: oklch(0.972 0.011 84);
   --paper-raised: oklch(0.983 0.008 84);
   --ink: oklch(0.24 0.015 62);
@@ -138,6 +141,21 @@ a:hover { color: var(--accent); }
   color: var(--muted);
 }
 
+.mast-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.mast-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 1px solid var(--rule-strong);
+  background: var(--paper-raised);
+  display: block;
+}
+
 .mast-actions {
   display: flex;
   align-items: center;
@@ -221,6 +239,29 @@ a:hover { color: var(--accent); }
   font-size: 0.72rem;
   letter-spacing: 0.06em;
   color: var(--muted);
+}
+
+/* ——— empty states: shown purely in CSS when leonui has hidden every row ——— */
+
+.empty-note {
+  display: none;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1.1rem;
+  flex-wrap: wrap;
+  padding: clamp(1.3rem, 2.8vw, 1.9rem) 0.4rem;
+  border-bottom: 1px solid var(--rule);
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+.empty-note p { margin: 0; }
+
+.empty-note .pill { font-style: normal; }
+
+.works-list:not(:has(li:not([hidden]))) + .empty-note,
+.bib-list:not(:has(li:not([hidden]))) + .empty-note {
+  display: flex;
 }
 
 /* ——— title block ——— */
@@ -603,6 +644,35 @@ code {
   from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: none; }
 }
+
+/* ——— 404: the erratum page ——— */
+
+.lost {
+  padding-block: clamp(5rem, 14vw, 10rem);
+  max-width: 69rem;
+}
+
+.lost .kicker { margin-bottom: 1.2rem; }
+
+.lost-title {
+  margin: 0;
+  font-family: var(--serif-display);
+  font-size: clamp(2.4rem, 4rem + 3vw, 5.5rem);
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.015em;
+}
+
+.lost-title .sect-no { font-size: 0.55em; }
+
+.lost-note {
+  margin: 1.8rem 0 2.4rem;
+  max-width: 46ch;
+  color: var(--ink-soft);
+  font-size: 1.05em;
+}
+
+a.pill { text-decoration: none; }
 
 /* ——— print: a paper should survive paper ——— */
 

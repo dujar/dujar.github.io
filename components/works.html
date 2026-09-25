@@ -1,0 +1,37 @@
+    <section class="works" aria-labelledby="works-title">
+      <div class="section-head rise d5">
+        <h2 id="works-title"><span class="sect-no" aria-hidden="true">&sect;&thinsp;1.</span> Selected works</h2>
+        <span class="head-note" ui:bind="text: filtering ? 'matching works' : 'six of seventy-five'">six of seventy-five</span>
+      </div>
+
+      <noscript><p class="noscript-note">This document is compiled by leonui, a reactive runtime &mdash; enable JavaScript to render the lists below.</p></noscript>
+
+      <div class="filter-row">
+        <label class="microlabel" for="record-filter">Search</label>
+        <input id="record-filter" class="filter-input" type="text" autocomplete="off"
+               placeholder="filter the record &mdash; try &ldquo;Rust&rdquo;" ui:model="q">
+        <button type="button" class="pill" hidden
+                ui:bind-hidden="!filtering"
+                ui:fx="click: set q = ''">clear</button>
+        <button type="button" class="pill"
+                ui:fx="click: set sort = sort == 'id' ? 'name' : 'id'"
+                ui:bind="text: sort == 'id' ? 'ordered as curated' : 'ordered alphabetically'">ordered as curated</button>
+      </div>
+
+      <ol class="works-list">
+        <li class="work rise d6" ui:each="w in sorted" ui:key="id"
+            ui:bind-hidden="filtering && !contains(w.name + ' ' + w.desc + ' ' + w.lang, q)">
+          <span class="work-no" aria-hidden="true" ui:bind="text: '0' + w.id">01</span>
+          <div class="work-body">
+            <h3 class="work-name"><a ui:bind-attr:href="w.url" ui:bind="text: w.name">leonui</a><span class="arrow" aria-hidden="true">&rarr;</span></h3>
+            <p class="work-desc" ui:bind="text: w.desc"></p>
+          </div>
+          <span class="work-meta"><span class="meta-lang" ui:bind="text: w.lang">TypeScript</span><span class="meta-year" ui:bind="text: w.year">2026</span></span>
+        </li>
+      </ol>
+
+      <div class="empty-note">
+        <p>No works match &ldquo;<span ui:bind="text: q"></span>&rdquo; in this collection.</p>
+        <button type="button" class="pill" ui:fx="click: set q = ''">show everything</button>
+      </div>
+    </section>
